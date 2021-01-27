@@ -1,5 +1,10 @@
 <?php
+//retourne les 10 derniers posts avec leur auteurs.
 function lastBlogPosts (PDO $dbh) {
-    $tableArticle = [];
-    return $tableArticle;
+    return $dbh->query('SELECT postTitle, authors.name
+FROM `posts`
+INNER JOIN authors
+ON authors_id=authors.id
+ORDER BY `publicationStart` DESC
+LIMIT 10');
 }
