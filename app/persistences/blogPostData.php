@@ -2,15 +2,16 @@
 //retourne les 10 derniers posts avec leur auteurs.
 
 //requete préparé
-function lastBlogPosts($dbh){
-$statementhandle = $dbh->prepare('SELECT postTitle, authors.nickname
+function lastBlogPosts($dbh)
+{
+    $statementhandle = $dbh->prepare('SELECT postTitle, postText, authors.nickname
 FROM `posts`
 INNER JOIN authors
 ON authors_id=authors.id
 ORDER BY `publicationStart` DESC
 LIMIT 10');
-$statementhandle->execute();
-return $statementhandle->fetchAll(\PDO::FETCH_ASSOC);
+    $statementhandle->execute();
+    return $statementhandle->fetchAll(\PDO::FETCH_ASSOC);
 }
 
 /*
@@ -26,3 +27,19 @@ LIMIT 4');
     return $result;
 }
 */
+
+function blogPostById($dbh)
+{
+    $statementhandle = $dbh->prepare('SELECT postTitle, postText, authors.nickname
+FROM posts
+INNER JOIN authors
+ON authors_id=authors.id
+ORDER BY publicationStart DESC');
+    $statementhandle->execute();
+    return $statementhandle->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+function commentsByBlogPost($dbh)
+{
+
+}

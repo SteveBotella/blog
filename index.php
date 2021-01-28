@@ -5,6 +5,7 @@ require_once 'config/database.php';
 require 'ressources/views/header.tpl';
 $map = [
     'home' => 'app/controllers/homeController.php',
+    'blogpost' => 'app/controllers/blogPostController.php',
     '404' => 'ressources/views/errors/404.php',
 ];
 if (filter_has_var(INPUT_GET, 'action')) {
