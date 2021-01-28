@@ -1,8 +1,15 @@
 <?php if (!empty($resultTableArticle)): ?>
-<?php $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING) ?>
         <div>
-            <h2><?=$resultTableArticle[$id]['postTitle']?></h2>
-            <?=$resultTableArticle[$id]['postText']?><br><br>
-            <?=$resultTableArticle[$id]['nickname']?><br><br>
+            <h2><?=$resultTableArticle['postTitle']?></h2>
+            <?=$resultTableArticle['postText']?><br><br>
+            <?=$resultTableArticle['nickname']?><br><br>
         </div>
+<?php if (!empty($resultTableComment)): ?>
+        <?php foreach ($resultTableComment as $Comment): ?>
+        <div>
+            <?=$Comment['commentText']?>
+            <?=$Comment['nickname']?>
+        </div>
+        <?php endforeach; ?>
+<?php endif; ?>
 <?php endif; ?>

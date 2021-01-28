@@ -30,16 +30,28 @@ LIMIT 4');
 
 function blogPostById($dbh)
 {
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
     $statementhandle = $dbh->prepare('SELECT postTitle, postText, authors.nickname
 FROM posts
 INNER JOIN authors
 ON authors_id=authors.id
+WHERE posts.id = :id
 ORDER BY publicationStart DESC');
+    $statementhandle->bindParam(':id', $id, PDO::PARAM_INT);
     $statementhandle->execute();
-    return $statementhandle->fetchAll(\PDO::FETCH_ASSOC);
+    return $statementhandle->fetch(\PDO::FETCH_ASSOC);
 }
 
 function commentsByBlogPost($dbh)
 {
-
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+    $statementhandle = $dbh->prepare('SELECT commentText, authors.nickname
+FROM comments
+INNER JOIN authors
+ON authors_id=authors.id
+WHERE articles_id = :id
+ORDER BY dateAdd DESC');
+    $statementhandle->bindParam(':id', $id, PDO::PARAM_INT);
+    $statementhandle->execute();
+    return $statementhandle->fetchAll(\PDO::FETCH_ASSOC);
 }
