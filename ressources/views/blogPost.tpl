@@ -8,7 +8,7 @@
         <?php foreach ($resultTableComment as $Comment): ?>
         <div>
             <?=$Comment['commentText']?><br>
-            <?=$Comment['nickname']?><br>
+            <?=$Comment['nickname']?><br><br>
         </div>
         <?php endforeach; ?>
 <?php endif; ?>

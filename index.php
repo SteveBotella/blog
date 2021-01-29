@@ -7,6 +7,7 @@ $map = [
     'home' => 'app/controllers/homeController.php',
     'blogpost' => 'app/controllers/blogPostController.php',
     '404' => 'ressources/views/errors/404.php',
+    'blogpostcreate' => 'app/controllers/blogPostCreateController.php',
 ];
 if (filter_has_var(INPUT_GET, 'action')) {
     $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
