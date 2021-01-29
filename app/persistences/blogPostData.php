@@ -54,11 +54,16 @@ ORDER BY dateAdd DESC');
     return $statementhandle->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-function blogPostCreate(PDO $dbh)
+function blogPostCreate(PDO $dbh, $postTitle, $postText, $publicationStart, $publicationEnd, $authorId)
 {
     $statementhandle = $dbh->prepare('INSERT INTO posts (postTitle, postText, publicationStart, publicationEnd, authors_id)
-VALUES ("Nouveau", "un post a été créé", now(), "2022-01-26 14:10:17", 1)
+VALUES ( :postTitle, :text, :publicationStart, :publicationEnd, :authorId)
 ');
+    $statementhandle->bindParam(':postTitle', $postTitle, PDO::PARAM_STR, 50);
+    $statementhandle->bindParam(':postText', $postText, PDO::PARAM_STR, 150);
+    $statementhandle->bindParam(':publicationStart', $publicationStart, PDO::PARAM_STR, 20);
+    $statementhandle->bindParam(':publicationEnd', $publicationEnd, PDO::PARAM_STR, 20);
+    $statementhandle->bindParam(':authorId', $authorId, PDO::PARAM_STR, 20);
     $statementhandle->execute();
     return $statementhandle->fetch(\PDO::FETCH_ASSOC);
 }
